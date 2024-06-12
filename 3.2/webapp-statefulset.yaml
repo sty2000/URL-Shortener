@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: webapp-statefulset
+spec:
+  replicas: 3
+  serviceName: webapp-control
+  selector:
+    matchLabels:
+      app: webapp
+  template:
+    metadata:
+      labels:
+        app: webapp
+    spec:
+      containers:
+      - name: webapp
+        image: cedar3/webassn3:group16
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5000
+        volumeMounts:
+        - name: nfs-vol
+          mountPath: /nfs/share
+      volumes:
+      - name: nfs-vol
+        nfs:
+          server: 145.100.135.146  # IP to our NFS server
+          path: /nfs/share

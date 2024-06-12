@@ -1,0 +1,8 @@
+version: "1"
+services:
+  webapp: 
+    image: cedar3/webassn3:local
+    ports:
+      - "5001:5001"
+    volumes:
+      - C:\Users\hchen\Documents\web\webAssn3:/app/nfs/share
